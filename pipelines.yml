@@ -43,6 +43,10 @@ pipelines:
               key2: value2
             - key1: v1
               key2: v2
+            - key1: v3
+              key2: v4
+            - key1: v5
+              key2: v6
           runtimes:
             - type: image
               image:
