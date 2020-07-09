@@ -41,6 +41,8 @@ pipelines:
           environmentVariables:
             - key1: value1
               key2: value2
+            - key1: v1
+              key2: v2
           runtimes:
             - type: image
               image:
@@ -57,6 +59,7 @@ pipelines:
                     - 8.17.0
         execution:
           onExecute:
+            - sleep 15s
             - echo "Executing matrix step on ${steplet_id}"
             - cat ./fanout_demo/input.txt
             - cat ./fanout_demo_1/input.txt
@@ -80,8 +83,6 @@ pipelines:
           environmentVariables:
             - key1: value1
               key2: value2
-            - key1: value3
-              key2: value4
           runtimes:
             - type: image
               image:
@@ -98,7 +99,6 @@ pipelines:
                     - 8.17.0
         execution:
           onExecute:
-            - sleep 15s
             - echo "Executing matrix step on ${steplet_id}"
             - cat ./fanout_demo/input.txt
             - cat ./fanout_demo_1/input.txt
