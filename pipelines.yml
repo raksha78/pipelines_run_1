@@ -6,9 +6,6 @@ pipelines:
         stepMode: Bash
         configuration:
           multiNode: true
-          inputSteps:
-            - name: fanout_demo
-            - name: fanout_demo_1
         stepletMultipliers:
           environmentVariables:
             - key1: value1
