@@ -1,38 +1,11 @@
 pipelines:
-  - name: Only_Matrix
+  - name: FreeTier
     steps:
-      - name: matrix_demo
-        type: Matrix
-        stepMode: Bash
-        configuration:
-          multiNode: true
-        stepletMultipliers:
-          environmentVariables:
-            - key1: value1
-              key2: value2
-            - key1: v1
-              key2: v2
-            - key1: v3
-              key2: v4
-            - key1: v5
-              key2: v6
-          runtimes:
-            - type: image
-              image:
-                auto:
-                  language: java
-                  versions:
-                    - 13.0
-
-            - type: image
-              image:
-                auto:
-                  language: node
-                  versions:
-                    - 8.17.0
+      - name: free
+        type: Bash
         execution:
           onExecute:
-            - sleep 15s
+            - printenv
             - echo "Executing matrix step on ${steplet_id}"
               
               
