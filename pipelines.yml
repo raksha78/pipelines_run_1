@@ -1,11 +1,55 @@
 pipelines:
-  - name: FreeTier
+  - name: AffinityGroupTest
     steps:
-      - name: free
+      - name: step_a
         type: Bash
+        configuration:
+          affinityGroup: group_a
         execution:
           onExecute:
             - printenv
-            - echo "Executing matrix step on ${steplet_id}"
+            - echo "Executing step on ${steplet_id}"
+      - name: step_b
+        type: Bash
+        configuration:
+          affinityGroup: group_a
+        execution:
+          onExecute:
+            - printenv
+            - echo "Executing step on ${steplet_id}"
+
+      - name: step_join
+        type: Bash
+        execution:
+        configuration:
+          inputSteps:
+            - name: step_a
+            - name: step_b
+          onExecute:
+            - printenv
+            - echo "Executing step on ${steplet_id}"
+
+      - name: step_c
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: step_join
+          affinityGroup: group_b
+        execution:
+          onExecute:
+            - printenv
+            - echo "Executing step on ${steplet_id}"
+            
+      - name: step_d
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: step_join
+          affinityGroup: group_b
+        execution:
+          onExecute:
+            - printenv
+            - echo "Executing step on ${steplet_id}"
+
               
               
