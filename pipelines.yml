@@ -20,14 +20,14 @@ pipelines:
 
       - name: step_join
         type: Bash
-        execution:
         configuration:
           inputSteps:
             - name: step_a
             - name: step_b
+        execution:
           onExecute:
-            - printenv
-            - echo "Executing step on ${steplet_id}"
+              - printenv
+              - echo "Executing step on ${steplet_id}"
 
       - name: step_c
         type: Bash
@@ -39,7 +39,7 @@ pipelines:
           onExecute:
             - printenv
             - echo "Executing step on ${steplet_id}"
-            
+
       - name: step_d
         type: Bash
         configuration:
