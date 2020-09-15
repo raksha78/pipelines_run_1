@@ -13,6 +13,7 @@ pipelines:
           inputSteps:
             - name: start
           affinityGroup: group_a
+          priority: 1
         execution:
           onExecute:
             - printenv
@@ -23,7 +24,7 @@ pipelines:
           inputSteps:
             - name: start
           affinityGroup: group_a
-
+          priority: 2
         execution:
           onExecute:
             - printenv
