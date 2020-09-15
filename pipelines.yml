@@ -29,6 +29,28 @@ pipelines:
           onExecute:
             - printenv
             - echo "Executing step on ${steplet_id}"
+      - name: step_b1
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: start
+          affinityGroup: group_a
+          priority: 3
+        execution:
+          onExecute:
+            - printenv
+            - echo "Executing step on ${steplet_id}"
+      - name: step_b2
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: start
+          affinityGroup: group_a
+          priority: 4
+        execution:
+          onExecute:
+            - printenv
+            - echo "Executing step on ${steplet_id}"
 
       - name: step_join
         type: Bash
@@ -36,6 +58,8 @@ pipelines:
           inputSteps:
             - name: step_a
             - name: step_b
+            - name: step_b1
+            - name: step_b2            
         execution:
           onExecute:
               - printenv
