@@ -1,9 +1,17 @@
 pipelines:
   - name: AffinityGroupTest
     steps:
+      - name: start
+        type: Bash
+        execution:
+          onExecute:
+            - printenv
+            - echo "Executing step on ${steplet_id}"
       - name: step_a
         type: Bash
         configuration:
+          inputSteps:
+            - name: start
           affinityGroup: group_a
         execution:
           onExecute:
@@ -12,7 +20,10 @@ pipelines:
       - name: step_b
         type: Bash
         configuration:
+          inputSteps:
+            - name: start
           affinityGroup: group_a
+
         execution:
           onExecute:
             - printenv
