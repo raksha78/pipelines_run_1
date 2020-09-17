@@ -1,5 +1,5 @@
 pipelines:
-  - name: AffinityGroupTest
+  - name: AffinityGroupSeriesTest
     steps:
       - name: start
         type: Bash
