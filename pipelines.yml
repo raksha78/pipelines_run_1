@@ -1,5 +1,5 @@
 pipelines:
-  - name: AffinityGroupSeriesTest2
+  - name: AffinityGroupSeriesTest3
     steps:
       - name: start
         type: Bash
@@ -23,7 +23,7 @@ pipelines:
         type: Bash
         configuration:
           inputSteps:
-            - name: step_a
+            - name: start
           affinityGroup: group_a
           priority: 5
         execution:
@@ -46,7 +46,6 @@ pipelines:
         configuration:
           inputSteps:
             - name: step_a1
-            - name: step_a2
           affinityGroup: group_a
           priority: 2
         execution:
@@ -68,7 +67,7 @@ pipelines:
         type: Bash
         configuration:
           inputSteps:
-            - name: step_b1
+            - name: step_a2
           affinityGroup: group_a
           priority: 4
         execution:
@@ -80,33 +79,12 @@ pipelines:
         type: Bash
         configuration:
           inputSteps:
-            - name: step_b2            
+            - name: step_b2
+            - name: step_b1            
         execution:
           onExecute:
               - printenv
               - echo "Executing step on ${steplet_id}"
-
-      - name: step_c
-        type: Bash
-        configuration:
-          inputSteps:
-            - name: step_join
-          affinityGroup: group_b
-        execution:
-          onExecute:
-            - printenv
-            - echo "Executing step on ${steplet_id}"
-
-      - name: step_d
-        type: Bash
-        configuration:
-          inputSteps:
-            - name: step_join
-          affinityGroup: group_b
-        execution:
-          onExecute:
-            - printenv
-            - echo "Executing step on ${steplet_id}"
 
               
               
