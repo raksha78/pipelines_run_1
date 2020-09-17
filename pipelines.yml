@@ -22,7 +22,7 @@ pipelines:
         type: Bash
         configuration:
           inputSteps:
-            - name: start
+            - name: step_a
           affinityGroup: group_a
           priority: 2
         execution:
@@ -33,7 +33,7 @@ pipelines:
         type: Bash
         configuration:
           inputSteps:
-            - name: start
+            - name: step_b
           affinityGroup: group_a
           priority: 3
         execution:
@@ -44,7 +44,7 @@ pipelines:
         type: Bash
         configuration:
           inputSteps:
-            - name: start
+            - name: step_b1
           affinityGroup: group_a
           priority: 4
         execution:
@@ -56,9 +56,6 @@ pipelines:
         type: Bash
         configuration:
           inputSteps:
-            - name: step_a
-            - name: step_b
-            - name: step_b1
             - name: step_b2            
         execution:
           onExecute:
