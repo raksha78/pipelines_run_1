@@ -1,5 +1,5 @@
 pipelines:
-  - name: AffinityGroupSeriesTest3
+  - name: AffinityGroupSeriesTest4
     steps:
       - name: start
         type: Bash
@@ -7,84 +7,103 @@ pipelines:
           onExecute:
             - printenv
             - echo "Executing step on ${steplet_id}"
-            
+
       - name: step_a
         type: Bash
         configuration:
+          affinityGroup: group
           inputSteps:
             - name: start
-          affinityGroup: group_a
-          priority: 1
         execution:
           onExecute:
             - printenv
             - echo "Executing step on ${steplet_id}"
+
       - name: step_a1
         type: Bash
         configuration:
+          affinityGroup: group
           inputSteps:
-            - name: start
-          affinityGroup: group_a
-          priority: 5
+            - name: step_a
         execution:
           onExecute:
             - printenv
             - echo "Executing step on ${steplet_id}"
+
       - name: step_a2
         type: Bash
         configuration:
+          affinityGroup: group
           inputSteps:
-            - name: step_a
-          affinityGroup: group_a
-          priority: 6
+            - name: step_a1
         execution:
           onExecute:
             - printenv
             - echo "Executing step on ${steplet_id}"
+
+      - name: step_a3
+        type: Bash
+        configuration:
+          affinityGroup: group
+          inputSteps:
+            - name: step_a
+        execution:
+          onExecute:
+            - printenv
+            - echo "Executing step on ${steplet_id}"
+
       - name: step_b
         type: Bash
         configuration:
+          affinityGroup: group
           inputSteps:
-            - name: step_a1
-          affinityGroup: group_a
-          priority: 2
+            - name: start
         execution:
           onExecute:
             - printenv
             - echo "Executing step on ${steplet_id}"
+
       - name: step_b1
         type: Bash
         configuration:
+          affinityGroup: group
           inputSteps:
             - name: step_b
-          affinityGroup: group_a
-          priority: 3
         execution:
           onExecute:
             - printenv
             - echo "Executing step on ${steplet_id}"
+
       - name: step_b2
         type: Bash
         configuration:
+          affinityGroup: group
           inputSteps:
-            - name: step_a2
-          affinityGroup: group_a
-          priority: 4
+            - name: step_b1
         execution:
           onExecute:
             - printenv
             - echo "Executing step on ${steplet_id}"
 
-      - name: step_join
+      - name: step_b3
         type: Bash
         configuration:
+          affinityGroup: group
           inputSteps:
-            - name: step_b2
-            - name: step_b1            
+            - name: step_b1
         execution:
           onExecute:
-              - printenv
-              - echo "Executing step on ${steplet_id}"
+            - printenv
+            - echo "Executing step on ${steplet_id}"
 
-              
-              
+      - name: end
+        type: Bash
+        configuration:
+          affinityGroup: group
+          inputSteps:
+            - name: step_b3
+            - name: step_a3
+        execution:
+          onExecute:
+            - printenv
+            - echo "Executing step on ${steplet_id}"
