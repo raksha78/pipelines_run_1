@@ -1,5 +1,12 @@
+resources:
+    - name: prop1
+      type: PropertyBag
+      configuration:
+        key1: value1
+        key2: value2
+
 pipelines:
-  - name: AffinityGroupSeriesTest3
+  - name: AffinityGroupSeriesTestWithResource1
     steps:
       - name: start
         type: Bash
@@ -47,16 +54,20 @@ pipelines:
           inputSteps:
             - name: step_a1
           affinityGroup: group_a
+          outputResources:
+            - name: prop1
           priority: 2
         execution:
           onExecute:
             - printenv
             - echo "Executing step on ${steplet_id}"
+            - write_output prop1 "date1=$date"
+
       - name: step_b1
         type: Bash
         configuration:
-          inputSteps:
-            - name: step_b
+          inputResources:
+            - name: prop1
           affinityGroup: group_a
           priority: 3
         execution:
