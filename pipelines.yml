@@ -33,12 +33,25 @@ pipelines:
         configuration:
           inputSteps:
             - name: step_b
+            - name: step_e
           affinityGroup: group_a
         execution:
           onExecute:
             - printenv
             - echo "Executing step on ${steplet_id}"
+
       - name: step_d
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: start
+        execution:
+          onExecute:
+            - printenv
+            - echo "Executing step on ${steplet_id}"
+            - sleep 30s
+
+      - name: step_e
         type: Bash
         configuration:
           inputSteps:
