@@ -1,9 +1,17 @@
 pipelines:
   - name: SimpleTest
     steps:
+      - name: start
+        type: Bash
+        execution:
+          onExecute:
+            - printenv
+            - echo "Executing step on ${steplet_id}"  
       - name: step_a
         type: Bash
         configuration:
+          inputSteps:
+            - name: start
           affinityGroup: group_a
         execution:
           onExecute:
@@ -32,6 +40,9 @@ pipelines:
             - echo "Executing step on ${steplet_id}"
       - name: step_d
         type: Bash
+        configuration:
+          inputSteps:
+            - name: start
         execution:
           onExecute:
             - printenv
