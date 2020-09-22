@@ -36,3 +36,4 @@ pipelines:
           onExecute:
             - printenv
             - echo "Executing step on ${steplet_id}"
+            - sleep 30s
