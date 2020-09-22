@@ -4,6 +4,8 @@ pipelines:
       - name: step_a
         type: Bash
         execution:
+          configuration:
+            affinityGroup: group_a
           onExecute:
             - printenv
             - echo "Executing step on ${steplet_id}"     
