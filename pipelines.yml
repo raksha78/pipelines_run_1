@@ -14,6 +14,7 @@ pipelines:
           inputSteps:
             - name: start
           affinityGroup: group_a
+          priority: 2
         execution:
           onExecute:
             - printenv
@@ -25,6 +26,7 @@ pipelines:
           inputSteps:
             - name: start
           affinityGroup: group_a
+          priority: 3
         execution:
           onExecute:
             - printenv
@@ -37,6 +39,7 @@ pipelines:
             - name: step_a
             - name: step_b
           affinityGroup: group_a
+          priority: 4
         execution:
           onExecute:
             - printenv
@@ -50,11 +53,11 @@ pipelines:
             - name: step_b
             - name: step_c
           affinityGroup: group_a
+          priority: 5
         execution:
           onExecute:
             - printenv
             - echo "Executing step on ${steplet_id}"
-            - sleep 30s
 
       - name: step_e
         type: Bash
@@ -65,11 +68,11 @@ pipelines:
             - name: step_c
             - name: step_d
           affinityGroup: group_a
+          priority: 6
         execution:
           onExecute:
             - printenv
             - echo "Executing step on ${steplet_id}"
-            - sleep 30s
 
       - name: step_f
         type: Bash
@@ -81,8 +84,8 @@ pipelines:
             - name: step_d
             - name: step_e
           affinityGroup: group_a
+          priority: 7
         execution:
           onExecute:
             - printenv
             - echo "Executing step on ${steplet_id}"
-            - sleep 30s
