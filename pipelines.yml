@@ -1,3 +1,28 @@
+resources:
+  - name: complex1
+    type: PropertyBag
+    configuration:
+      key1: value1
+      key2: value2
+
+  - name: complex2
+    type: PropertyBag
+    configuration:
+      key1: value1
+      key2: value2
+
+  - name: complex3
+    type: PropertyBag
+    configuration:
+      key1: value1
+      key2: value2
+
+  - name: complex4
+    type: PropertyBag
+    configuration:
+      key1: value1
+      key2: value2
+
 pipelines:
   - name: Complex1
     steps:
@@ -13,6 +38,8 @@ pipelines:
         configuration:
           inputSteps:
             - name: start
+          outputResources:
+            - name: complex1
           affinityGroup: group_a
           priority: 2
         execution:
@@ -27,6 +54,10 @@ pipelines:
             - name: start
           affinityGroup: group_a
           priority: 3
+          inputResources:
+            - name: complex1
+          outputResources:
+            - name: complex2
         execution:
           onExecute:
             - printenv
@@ -40,6 +71,11 @@ pipelines:
             - name: step_b
           affinityGroup: group_a
           priority: 4
+          inputResources:
+            - name: complex1
+            - name: complex2
+          outputResources:
+            - name: complex3
         execution:
           onExecute:
             - printenv
@@ -54,6 +90,12 @@ pipelines:
             - name: step_c
           affinityGroup: group_a
           priority: 5
+          inputResources:
+            - name: complex1
+            - name: complex2
+            - name: complex3
+          outputResources:
+            - name: complex4
         execution:
           onExecute:
             - printenv
@@ -69,6 +111,11 @@ pipelines:
             - name: step_d
           affinityGroup: group_a
           priority: 6
+          inputResources:
+            - name: complex1
+            - name: complex2
+            - name: complex3
+            - name: complex4
         execution:
           onExecute:
             - printenv
@@ -85,6 +132,10 @@ pipelines:
             - name: step_e
           affinityGroup: group_a
           priority: 7
+          inputResources:
+            - name: complex1
+          outputResources:
+            - name: complex2
         execution:
           onExecute:
             - printenv
