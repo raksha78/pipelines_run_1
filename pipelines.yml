@@ -134,8 +134,6 @@ pipelines:
           priority: 7
           inputResources:
             - name: complex1
-          outputResources:
-            - name: complex2
         execution:
           onExecute:
             - printenv
