@@ -49,6 +49,7 @@ pipelines:
             - name: step_a
             - name: step_b
             - name: step_c
+          affinityGroup: group_a
         execution:
           onExecute:
             - printenv
@@ -63,6 +64,7 @@ pipelines:
             - name: step_b
             - name: step_c
             - name: step_d
+          affinityGroup: group_a
         execution:
           onExecute:
             - printenv
@@ -78,6 +80,7 @@ pipelines:
             - name: step_c
             - name: step_d
             - name: step_e
+          affinityGroup: group_a
         execution:
           onExecute:
             - printenv
