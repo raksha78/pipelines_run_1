@@ -7,6 +7,7 @@ pipelines:
           onExecute:
             - printenv
             - echo "Executing step on ${steplet_id}"  
+
       - name: step_a
         type: Bash
         configuration:
@@ -16,24 +17,25 @@ pipelines:
         execution:
           onExecute:
             - printenv
-            - echo "Executing step on ${steplet_id}"     
+            - echo "Executing step on ${steplet_id}"   
+
       - name: step_b
         type: Bash
         configuration:
           inputSteps:
-            - name: step_a
-            - name: step_d
+            - name: start
           affinityGroup: group_a
         execution:
           onExecute:
             - printenv
             - echo "Executing step on ${steplet_id}"
+
       - name: step_c
         type: Bash
         configuration:
           inputSteps:
+            - name: step_a
             - name: step_b
-            - name: step_e
           affinityGroup: group_a
         execution:
           onExecute:
@@ -44,7 +46,9 @@ pipelines:
         type: Bash
         configuration:
           inputSteps:
-            - name: start
+            - name: step_a
+            - name: step_b
+            - name: step_c
         execution:
           onExecute:
             - printenv
@@ -55,7 +59,25 @@ pipelines:
         type: Bash
         configuration:
           inputSteps:
-            - name: start
+            - name: step_a
+            - name: step_b
+            - name: step_c
+            - name: step_d
+        execution:
+          onExecute:
+            - printenv
+            - echo "Executing step on ${steplet_id}"
+            - sleep 30s
+
+      - name: step_f
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: step_a
+            - name: step_b
+            - name: step_c
+            - name: step_d
+            - name: step_e
         execution:
           onExecute:
             - printenv
