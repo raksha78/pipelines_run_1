@@ -73,6 +73,7 @@ pipelines:
           priority: 4
           inputResources:
             - name: complex1
+              newVersionOnly: true
             - name: complex2
           outputResources:
             - name: complex3
