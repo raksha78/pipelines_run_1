@@ -1,101 +1,33 @@
 resources:
-    - name: prop1
+    - name: testing_res
       type: PropertyBag
       configuration:
         key1: value1
         key2: value2
 
 pipelines:
-  - name: AffinityGroupSeriesTestWithResource1
+  - name: Pipeline_A
     steps:
-      - name: start
-        type: Bash
-        execution:
-          onExecute:
-            - printenv
-            - echo "Executing step on ${steplet_id}"
-            
-      - name: step_a
-        type: Bash
-        configuration:
-          inputSteps:
-            - name: start
-          affinityGroup: group_a
-          priority: 1
-        execution:
-          onExecute:
-            - printenv
-            - echo "Executing step on ${steplet_id}"
       - name: step_a1
         type: Bash
         configuration:
-          inputSteps:
-            - name: start
-          affinityGroup: group_a
+          outputResources:
+            - name: testing_res
           priority: 5
         execution:
           onExecute:
             - printenv
             - echo "Executing step on ${steplet_id}"
+
+  - name: Pipeline_B
+    steps:
       - name: step_a2
         type: Bash
         configuration:
-          inputSteps:
-            - name: step_a
-          affinityGroup: group_a
+          inputResources:
+            - name: testing_res
           priority: 6
         execution:
           onExecute:
             - printenv
             - echo "Executing step on ${steplet_id}"
-      - name: step_b
-        type: Bash
-        configuration:
-          inputSteps:
-            - name: step_a1
-          affinityGroup: group_a
-          outputResources:
-            - name: prop1
-          priority: 2
-        execution:
-          onExecute:
-            - printenv
-            - echo "Executing step on ${steplet_id}"
-            - write_output prop1 "date1=$date"
-
-      - name: step_b1
-        type: Bash
-        configuration:
-          inputResources:
-            - name: prop1
-          affinityGroup: group_a
-          priority: 3
-        execution:
-          onExecute:
-            - printenv
-            - echo "Executing step on ${steplet_id}"
-      - name: step_b2
-        type: Bash
-        configuration:
-          inputSteps:
-            - name: step_a2
-          affinityGroup: group_a
-          priority: 4
-        execution:
-          onExecute:
-            - printenv
-            - echo "Executing step on ${steplet_id}"
-
-      - name: step_join
-        type: Bash
-        configuration:
-          inputSteps:
-            - name: step_b2
-            - name: step_b1            
-        execution:
-          onExecute:
-              - printenv
-              - echo "Executing step on ${steplet_id}"
-
-              
-              
