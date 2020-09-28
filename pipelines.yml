@@ -19,7 +19,7 @@ pipelines:
             - printenv
             - echo "Executing step on ${steplet_id}"
             - date=$(date)
-            - write_output property_bag "date=$date"
+            - write_output testing_res "date=$date"
 
   - name: Pipeline_B
     steps:
