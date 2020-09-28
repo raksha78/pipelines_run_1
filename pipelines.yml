@@ -18,6 +18,8 @@ pipelines:
           onExecute:
             - printenv
             - echo "Executing step on ${steplet_id}"
+            - date=$(date)
+            - write_output property_bag "date=$date"
 
   - name: Pipeline_B
     steps:
