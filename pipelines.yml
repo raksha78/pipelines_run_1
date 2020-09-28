@@ -1,5 +1,5 @@
 pipelines:
-  - name: Only_Matrix
+  - name: Multi_Node
     steps:
       - name: matrix_demo
         type: Matrix
