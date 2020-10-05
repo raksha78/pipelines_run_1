@@ -32,6 +32,7 @@ pipelines:
                     - 8.17.0
         execution:
           onExecute:
+            - sleep 5s
             - echo "Executing matrix step on ${steplet_id}"
               
               
