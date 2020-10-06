@@ -33,7 +33,7 @@ pipelines:
         type: Matrix
         stepMode: Bash
         configuration:
-          multiNode: true
+          multiNode: false
           inputSteps:
             - name: fanout_demo
             - name: fanout_demo_1
