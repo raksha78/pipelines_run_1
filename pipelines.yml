@@ -35,7 +35,7 @@ pipelines:
             - popd
 
       - name: Matrix_Fan_Out_1
-        type: FanOut
+        type: PreMatrix
         configuration:
           inputSteps: 
             - name: Normal_Step      
@@ -55,6 +55,15 @@ pipelines:
           inputResources:
             - name: self_repo
         stepletMultipliers:
+          fastFail: true
+          allowFailures:
+            - environmentVariables:
+                delay: 1
+                fail: 'true'
+          exclude:
+            - environmentVariables:
+                delay: 10
+                fail: 'true'
           environmentVariables:
             - delay: 1
               fail: 'true'
@@ -73,20 +82,8 @@ pipelines:
               [ $fail == 'false' ] 
             - ls -l .
 
-        fastFail: true
-
-        allowFailures:
-          - environmentVariables:
-              delay: 1
-              fail: 'true'
-              
-        exclude:
-          - environmentVariables:
-              delay: 10
-              fail: 'true'
-
       - name: Matrix_Fan_In
-        type: FanIn
+        type: PostMatrix
         configuration:
           inputSteps: 
             - name: matrix_2
