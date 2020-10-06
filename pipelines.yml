@@ -65,7 +65,20 @@ pipelines:
             - delay: 15
               fail: 'false'
             - delay: 20
-              fail: 'false' 
+              fail: 'false'
+          runtimes:
+            - type: image
+              image:
+                auto:
+                  language: java
+                  versions:
+                    - 13
+            - type: image
+              image:
+                auto:
+                  language: node
+                  versions:
+                    - 8.17.0
         execution:
           onStart:
             - sleep "$delay"
