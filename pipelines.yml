@@ -50,6 +50,7 @@ pipelines:
         type: Matrix
         stepMode: Bash
         configuration:
+          multiNode: true
           inputSteps: 
             - name: Matrix_Fan_Out_1
           inputResources:
