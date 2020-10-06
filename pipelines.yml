@@ -55,6 +55,7 @@ pipelines:
           inputResources:
             - name: self_repo
         stepletMultipliers:
+          fastFail: true
           environmentVariables:
             - delay: 5
               fail: 'true'
@@ -72,8 +73,6 @@ pipelines:
             - |
               [ $fail == 'true' ] 
             - ls -l .
-
-        fastFail: true
 
       - name: Matrix_Fan_In
         type: PostMatrix
