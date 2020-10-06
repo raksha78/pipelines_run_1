@@ -5,7 +5,7 @@ resources:
       path: Khazinawaz/pipelines_run_1
       branches:
         include: ^master$
-      gitProvider: s_github
+      gitProvider: nawaz_gh
 
   - name: matrix_property_bag_in
     type: PropertyBag
