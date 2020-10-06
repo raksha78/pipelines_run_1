@@ -5,7 +5,7 @@ resources:
       path: Khazinawaz/pipelines_run_1
       branches:
         include: ^master$
-      gitProvider: nawaz_gh
+      gitProvider: s_github
 
   - name: matrix_property_bag_in
     type: PropertyBag
@@ -35,7 +35,7 @@ pipelines:
             - popd
 
       - name: Matrix_Fan_Out_1
-        type: FanOut
+        type: PreMatrix
         configuration:
           inputSteps: 
             - name: Normal_Step      
@@ -76,7 +76,7 @@ pipelines:
         fastFail: true
 
       - name: Matrix_Fan_In
-        type: FanIn
+        type: PostMatrix
         configuration:
           inputSteps: 
             - name: matrix_2
