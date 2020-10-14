@@ -63,8 +63,8 @@ pipelines:
                     - 8.17.0
         execution:
           onExecute:
-            - sleep 15s
             - echo "Executing matrix step on ${steplet_id}"
+            - sleep 60s
             - cat ./fanout_demo/input.txt
             - cat ./fanout_demo_1/input.txt
             - touch input
