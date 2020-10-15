@@ -1,52 +1,7 @@
-resources:
-  - name: self_repo
-    type: GitRepo
-    configuration:
-      path: Khazinawaz/pipelines_run_1
-      branches:
-        include: ^master$
-      gitProvider: nawaz_gh
-
-  - name: matrix_property_bag_in
-    type: PropertyBag
-    configuration:
-      key1: value1
-      key2: value2
-
-  - name: matrix_property_bag_out
-    type: PropertyBag
-    configuration:
-      key1: value1
-
 pipelines:
-  - name: Pipeline
+  - name: FreeTier
     steps:
-      - name: Normal_Step
-        type: Bash
-        configuration:
-          inputResources:
-            - name: self_repo
-        execution: 
-          onExecute:
-            - pushd "$res_self_repo_resourcePath/"
-            - save_tests saveTests/empty/temp
-            - save_tests saveTests/correct
-            - echo "Passed"
-            - popd
-
-      - name: Matrix_Fan_Out_1
-        type: PreMatrix
-        configuration:
-          inputSteps: 
-            - name: Normal_Step      
-        execution: 
-          onExecute:
-            - echo "I am on fan out step"
-            - touch fan_out.txt
-            - set_step_var fan_out value1
-            - echo "Fan out working" > fan_out_1.txt
-
-      - name: matrix_2
+      - name: only_matrix
         type: Matrix
         stepMode: Bash
         configuration:
@@ -119,18 +74,4 @@ pipelines:
             - |
               [ $fail == 'true' ] 
             - ls -l .
-
-      - name: Matrix_Fan_In
-        type: PostMatrix
-        configuration:
-          inputSteps: 
-            - name: matrix_2
-        execution:
-          onExecute:
-            - echo "Hello World"
-            - ls -l .
-            - ls -l ./matrix_2
-            - ls -l ./matrix_2/Matrix_Fan_Out_1/
-            - get_step_var matrix_2 test_key
-            - get_step_var matrix_2 addresses
  
