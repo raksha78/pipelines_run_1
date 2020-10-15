@@ -50,19 +50,51 @@ pipelines:
         type: Matrix
         stepMode: Bash
         configuration:
-          multiNode: true
+          multiNode: false
           inputSteps: 
             - name: Matrix_Fan_Out_1
           inputResources:
             - name: self_repo
         stepletMultipliers:
-          fastFail: true
+          fastFail: false
           environmentVariables:
+            - delay: 1
+              fail: 'true'
+            - delay: 2
+              fail: 'false'
+            - delay: 3
+              fail: 'false'
+            - delay: 4
+              fail: 'false'
             - delay: 5
+              fail: 'true'
+            - delay: 6
+              fail: 'false'
+            - delay: 7
+              fail: 'false'
+            - delay: 8
+              fail: 'false'
+            - delay: 9
               fail: 'true'
             - delay: 10
               fail: 'false'
+            - delay: 11
+              fail: 'false'
+            - delay: 12
+              fail: 'false'
+            - delay: 13
+              fail: 'true'
+            - delay: 14
+              fail: 'false'
             - delay: 15
+              fail: 'false'
+            - delay: 16
+              fail: 'false'
+            - delay: 17
+              fail: 'true'
+            - delay: 18
+              fail: 'false'
+            - delay: 19
               fail: 'false'
             - delay: 20
               fail: 'false'
