@@ -6,10 +6,6 @@ pipelines:
         stepMode: Bash
         configuration:
           multiNode: false
-          inputSteps: 
-            - name: Matrix_Fan_Out_1
-          inputResources:
-            - name: self_repo
         stepletMultipliers:
           fastFail: false
           environmentVariables:
