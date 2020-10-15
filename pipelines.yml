@@ -5,6 +5,7 @@ pipelines:
         type: Matrix
         stepMode: Bash
         configuration:
+          timeoutSeconds: 15
           multiNode: false
           inputSteps: 
             - name: Matrix_Fan_Out_1
