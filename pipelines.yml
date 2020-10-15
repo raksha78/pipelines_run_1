@@ -12,13 +12,13 @@ pipelines:
           environmentVariables:
             - delay: 1m
               fail: 'true'
-            - delay: 2
+            - delay: 2m
               fail: 'false'
-            - delay: 3
+            - delay: 3m
               fail: 'false'
-            - delay: 4
+            - delay: 4m
               fail: 'false'
-            - delay: 5
+            - delay: 5m
               fail: 'true'
             - delay: 6
               fail: 'false'
