@@ -60,7 +60,7 @@ pipelines:
         configuration:
           affinityGroup: group1
           outputResources:
-            - name: m1
+            - name: m2
           inputSteps:
             - name: step2
         execution: 
