@@ -49,8 +49,6 @@ pipelines:
           affinityGroup: group1
           inputResources:
             - name: m1
-          inputSteps:
-            - name: step1
         execution: 
           onExecute:
             - echo "Step 2"
