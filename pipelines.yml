@@ -90,4 +90,4 @@ pipelines:
         execution: 
           onExecute:
             - echo "Step 1"
-            - write_output m2 "date1=$date"
+            - write_output m4 "date1=$date"
