@@ -20,7 +20,7 @@ resources:
         include: \btemplate\/.+\b
 
 pipelines:
-  - name: BugPipeline
+  - name: BugPipeline1
     steps:
       - name: template_build
         type: Bash
