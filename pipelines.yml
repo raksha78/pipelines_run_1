@@ -110,3 +110,19 @@ pipelines:
             - echo "Step 1"
             - date=$(date)
             - write_output m3 "date1=$date"
+
+  - name: ResTrig1
+    steps:
+      - name: trigger
+        type: Bash
+        configuration:
+          affinityGroup: group1
+          outputResources:
+            - name: m3
+            - name: m4
+        execution: 
+          onExecute:
+            - echo "Step 1"
+            - date=$(date)
+            - write_output m3 "date1=$date"
+            - write_output m4 "date1=$date"
