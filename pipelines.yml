@@ -52,6 +52,7 @@ pipelines:
           inputResources:
             - name: m1
             - name: m3
+            - name: m4
         execution: 
           onExecute:
             - echo "Step 2"
@@ -90,4 +91,5 @@ pipelines:
         execution: 
           onExecute:
             - echo "Step 1"
+            - date=$(date)
             - write_output m4 "date1=$date"
