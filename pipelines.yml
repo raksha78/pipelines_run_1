@@ -36,6 +36,8 @@ pipelines:
       - name: step1
         type: Bash
         configuration:
+          inputResources:
+            - name: m4
           affinityGroup: group1
           outputResources:
             - name: m1
@@ -76,3 +78,16 @@ pipelines:
         execution: 
           onExecute:
             - echo "Step 4"
+
+  - name: ResTrig
+    steps:
+      - name: trigger
+        type: Bash
+        configuration:
+          affinityGroup: group1
+          outputResources:
+            - name: m4
+        execution: 
+          onExecute:
+            - echo "Step 1"
+            - write_output m2 "date1=$date"
