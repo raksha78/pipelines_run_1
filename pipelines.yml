@@ -7,108 +7,69 @@ resources:
         include: ^tests-failing$
       gitProvider: nawaz_gh
 
-  - name: matrix_property_bag_in
+  - name: m1
     type: PropertyBag
     configuration:
       key1: value1
       key2: value2
 
-  - name: property_bag
+  - name: m2
     type: PropertyBag
     configuration:
       key1: value1
 
-  # - name: incoming
-  #   type: IncomingWebhook
-  #   configuration:
-  #     webhookName: incoming
+  - name: m3
+    type: PropertyBag
+    configuration:
+      key1: value1
+      key2: value2
+
+  - name: m4
+    type: PropertyBag
+    configuration:
+      key1: value1
+
 
 pipelines:
-  - name: Pipeline
+  - name: BugPipeline
     steps:
       - name: step1
         type: Bash
+        configuration:
+          affinityGroup: group1
         execution: 
           onExecute:
             - echo "Step 1"
-            - echo "Step1" >> file1
-            - add_run_files ./file1 file
-            - add_run_variables "step1_var=1"
 
       - name: step2
         type: Bash
         configuration:
-          outputResources:
-            - name: property_bag
+          affinityGroup: group1
           inputSteps:
             - name: step1
         execution: 
-          onStart:
-            - restore_run_files file ./file
-            - echo "$step1_var"
           onExecute:
-            - echo "Step 2"
-            - cat file
-            - echo "Step 2" >> file
-            - add_run_files ./file file
-            - date=$(date)
-            - write_output property_bag "date=$date"
-            - add_run_variables "step2_var=2"
+            - echo "Step 1"
 
-      - name: step4
+      - name: step3
         type: Bash
         configuration:
+          affinityGroup: group1
           outputResources:
-            - name: property_bag
+            - name: m1
           inputSteps:
-            - name: step1
+            - name: step2
         execution: 
-          onStart:
-            - restore_run_files file ./file
-            - echo "$step1_var"
           onExecute:
-            - echo "Step 4"
-            - cat file
-            - echo "Step 4" >> file
-            - add_run_files ./file file
+            - echo "Step 1"
             - date=$(date)
-            - add_run_variables "step4_var=4"
-            - write_output property_bag "date1=$date"
+            - write_output m1 "date1=$date"
 
       - name: step3
         type: Bash
         configuration:
           inputResources:
-            - name: property_bag
+            - name: m1
         execution: 
-          onStart:
-            - restore_run_files file ./file
-            - echo "$step1_var"
-            - echo "$step2_var"
-            - echo "$step4_var"
           onExecute:
-            - cat file
-            - echo "Step 3" >> file
-            - add_run_files ./file file
-            - add_run_variables "step3_var=3"
-
-      - name: step5
-        type: Bash
-        configuration:
-          inputSteps:
-            - name: step3
-        execution: 
-          onStart:
-            - restore_run_files file ./file
-            - echo "$step1_var"
-            - echo "$step2_var"
-            - echo "$step3_var"
-            - echo "$step4_var"
-          onExecute:
-            - cat file
-            - echo "Step 3" >> file
-            - add_run_files ./file file
-            - add_run_variables "step3_var=3"
-            
-
-          
+            - echo "Step 4"
