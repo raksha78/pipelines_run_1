@@ -15,6 +15,7 @@ pipelines:
         execution: 
           onExecute:
             - echo "Step 2"
+            - fail
             
       - name: Third_Step
         type: Bash
