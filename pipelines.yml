@@ -1,11 +1,23 @@
 resources:
-  - name: self_repo
+  - name: microGit
     type: GitRepo
     configuration:
       path: Khazinawaz/pipelines_run_1
       branches:
-        include: ^tests-failing$
+        include: ^{{gitBranch}}$
       gitProvider: nawaz_gh
+      files:
+        include: \bmicro\/.+\b
+        
+  - name: templateGit
+    type: GitRepo
+    configuration:
+      path: Khazinawaz/pipelines_run_1
+      branches:
+        include: ^{{gitBranch}}$
+      gitProvider: nawaz_gh
+      files:
+        include: \btemplate\/.+\b
 
   - name: m1
     type: PropertyBag
@@ -33,26 +45,27 @@ resources:
 pipelines:
   - name: BugPipeline
     steps:
-      - name: step1
+      - name: template_build
         type: Bash
         configuration:
           inputResources:
-            - name: m4
+            - name: templateGit
           affinityGroup: group1
           outputResources:
             - name: m1
         execution: 
           onExecute:
             - echo "Step 1"
+            - date=$(date)
+            - write_output m1 "date1=$date"
 
-      - name: step2
+      - name: micro_build
         type: Bash
         configuration:
           affinityGroup: group1
           inputResources:
             - name: m1
-            - name: m3
-            - name: m4
+            - name: microGit
         execution: 
           onExecute:
             - echo "Step 2"
@@ -63,10 +76,8 @@ pipelines:
           affinityGroup: group1
           outputResources:
             - name: m2
-          inputResources:
-            - name: m4
           inputSteps:
-            - name: step2
+            - name: micro_build
         execution: 
           onExecute:
             - echo "Step 1"
@@ -78,51 +89,50 @@ pipelines:
         configuration:
           inputResources:
             - name: m2
-            - name: m4
         execution: 
           onExecute:
             - echo "Step 4"
 
-  - name: ResTrig
-    steps:
-      - name: trigger
-        type: Bash
-        configuration:
-          affinityGroup: group1
-          outputResources:
-            - name: m4
-        execution: 
-          onExecute:
-            - echo "Step 1"
-            - date=$(date)
-            - write_output m4 "date1=$date"
+  # - name: ResTrig
+  #   steps:
+  #     - name: trigger
+  #       type: Bash
+  #       configuration:
+  #         affinityGroup: group1
+  #         outputResources:
+  #           - name: m4
+  #       execution: 
+  #         onExecute:
+  #           - echo "Step 1"
+  #           - date=$(date)
+  #           - write_output m4 "date1=$date"
 
-  - name: ResTrig1
-    steps:
-      - name: trigger
-        type: Bash
-        configuration:
-          affinityGroup: group1
-          outputResources:
-            - name: m3
-        execution: 
-          onExecute:
-            - echo "Step 1"
-            - date=$(date)
-            - write_output m3 "date1=$date"
+  # - name: ResTrig1
+  #   steps:
+  #     - name: trigger
+  #       type: Bash
+  #       configuration:
+  #         affinityGroup: group1
+  #         outputResources:
+  #           - name: m3
+  #       execution: 
+  #         onExecute:
+  #           - echo "Step 1"
+  #           - date=$(date)
+  #           - write_output m3 "date1=$date"
 
-  - name: ResTrig3
-    steps:
-      - name: trigger
-        type: Bash
-        configuration:
-          affinityGroup: group1
-          outputResources:
-            - name: m3
-            - name: m4
-        execution: 
-          onExecute:
-            - echo "Step 1"
-            - date=$(date)
-            - write_output m3 "date1=$date"
-            - write_output m4 "date1=$date"
+  # - name: ResTrig3
+  #   steps:
+  #     - name: trigger
+  #       type: Bash
+  #       configuration:
+  #         affinityGroup: group1
+  #         outputResources:
+  #           - name: m3
+  #           - name: m4
+  #       execution: 
+  #         onExecute:
+  #           - echo "Step 1"
+  #           - date=$(date)
+  #           - write_output m3 "date1=$date"
+  #           - write_output m4 "date1=$date"
