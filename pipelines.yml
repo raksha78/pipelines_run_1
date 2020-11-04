@@ -111,7 +111,7 @@ pipelines:
             - date=$(date)
             - write_output m3 "date1=$date"
 
-  - name: ResTrig2
+  - name: ResTrig3
     steps:
       - name: trigger
         type: Bash
