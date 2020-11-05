@@ -19,6 +19,29 @@ resources:
       files:
         include: \btemplate\/.+\b
 
+
+  - name: m1
+    type: PropertyBag
+    configuration:
+      key1: value1
+      key2: value2
+
+  - name: m2
+    type: PropertyBag
+    configuration:
+      key1: value1
+
+  - name: m3
+    type: PropertyBag
+    configuration:
+      key1: value1
+      key2: value2
+
+  - name: m4
+    type: PropertyBag
+    configuration:
+      key1: value1
+
 pipelines:
   - name: BugPipeline1
     steps:
