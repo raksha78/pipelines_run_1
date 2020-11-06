@@ -1,4 +1,24 @@
 resources:
+  - name: microGit
+    type: GitRepo
+    configuration:
+      path: Khazinawaz/pipelines_run_1
+      branches:
+        include: ^{{gitBranch}}$
+      gitProvider: nawaz_gh
+      files:
+        include: \bmicro\/.+\b
+        
+  - name: templateGit
+    type: GitRepo
+    configuration:
+      path: Khazinawaz/pipelines_run_1
+      branches:
+        include: ^{{gitBranch}}$
+      gitProvider: nawaz_gh
+      files:
+        include: \btemplate\/.+\b
+
   - name: folder1
     type: GitRepo
     configuration:
@@ -31,27 +51,27 @@ resources:
         include: \bfolder3\/.+\b
 
 
-  # - name: m1
-  #   type: PropertyBag
-  #   configuration:
-  #     key1: value1
-  #     key2: value2
+  - name: m1
+    type: PropertyBag
+    configuration:
+      key1: value1
+      key2: value2
 
-  # - name: m2
-  #   type: PropertyBag
-  #   configuration:
-  #     key1: value1
+  - name: m2
+    type: PropertyBag
+    configuration:
+      key1: value1
 
-  # - name: m3
-  #   type: PropertyBag
-  #   configuration:
-  #     key1: value1
-  #     key2: value2
+  - name: m3
+    type: PropertyBag
+    configuration:
+      key1: value1
+      key2: value2
 
-  # - name: m4
-  #   type: PropertyBag
-  #   configuration:
-  #     key1: value1
+  - name: m4
+    type: PropertyBag
+    configuration:
+      key1: value1
 
 pipelines:
   - name: BugPipeline2
