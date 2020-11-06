@@ -1,24 +1,4 @@
 resources:
-  - name: microGit
-    type: GitRepo
-    configuration:
-      path: Khazinawaz/pipelines_run_1
-      branches:
-        include: ^{{gitBranch}}$
-      gitProvider: nawaz_gh
-      files:
-        include: \bmicro\/.+\b
-        
-  - name: templateGit
-    type: GitRepo
-    configuration:
-      path: Khazinawaz/pipelines_run_1
-      branches:
-        include: ^{{gitBranch}}$
-      gitProvider: nawaz_gh
-      files:
-        include: \btemplate\/.+\b
-
   - name: folder1
     type: GitRepo
     configuration:
@@ -74,7 +54,7 @@ resources:
   #     key1: value1
 
 pipelines:
-  - name: BugPipeline1
+  - name: BugPipeline2
     steps:
       - name: template_build
         type: Bash
