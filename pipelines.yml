@@ -1,5 +1,5 @@
 resources:
-  - name: microGit
+  - name: mgit
     type: GitRepo
     configuration:
       path: Khazinawaz/pipelines_run_1
@@ -9,7 +9,7 @@ resources:
       files:
         include: \bmicro\/.+\b
         
-  - name: templateGit
+  - name: tgit
     type: GitRepo
     configuration:
       path: Khazinawaz/pipelines_run_1
@@ -50,6 +50,46 @@ resources:
       files:
         include: \bfolder3\/.+\b
 
+  - name: folder4
+    type: GitRepo
+    configuration:
+      path: Khazinawaz/pipelines_run_1
+      branches:
+        include: ^{{gitBranch}}$
+      gitProvider: nawaz_gh
+      files:
+        include: \bfolder4\/.+\b
+
+  - name: folder5
+    type: GitRepo
+    configuration:
+      path: Khazinawaz/pipelines_run_1
+      branches:
+        include: ^{{gitBranch}}$
+      gitProvider: nawaz_gh
+      files:
+        include: \bfolder4\/.+\b
+
+  - name: folder6
+    type: GitRepo
+    configuration:
+      path: Khazinawaz/pipelines_run_1
+      branches:
+        include: ^{{gitBranch}}$
+      gitProvider: nawaz_gh
+      files:
+        include: \bfolder4\/.+\b
+
+
+  - name: folder7
+    type: GitRepo
+    configuration:
+      path: Khazinawaz/pipelines_run_1
+      branches:
+        include: ^{{gitBranch}}$
+      gitProvider: nawaz_gh
+      files:
+        include: \bfolder4\/.+\b
 
   - name: m1
     type: PropertyBag
@@ -73,6 +113,28 @@ resources:
     configuration:
       key1: value1
 
+
+  - name: m5
+    type: PropertyBag
+    configuration:
+      key1: value1
+      key2: value2
+
+  - name: m6
+    type: PropertyBag
+    configuration:
+      key1: value1
+
+  - name: m7
+    type: PropertyBag
+    configuration:
+      key1: value1
+      key2: value2
+
+  - name: m8
+    type: PropertyBag
+    configuration:
+      key1: value1
 pipelines:
   - name: BugPipeline2
     steps:
@@ -80,7 +142,7 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-            - name: templateGit
+            - name: tgit
           affinityGroup: group1
           outputResources:
             - name: m1
@@ -98,11 +160,13 @@ pipelines:
           affinityGroup: group1
           outputResources:
             - name: m1
+            - name: m6
         execution: 
           onExecute:
             - echo "Step 1"
             - date=$(date)
-            - write_output m1 "date1=$date"
+            - write_output m5 "date1=$date"
+            - write_output m6 "date1=$date"
 
 
       - name: folder2_build
@@ -118,6 +182,7 @@ pipelines:
             - echo "Step 1"
             - date=$(date)
             - write_output m1 "date1=$date"
+            - write_output m8 "date1=$date"
 
 
       - name: folder3_build
@@ -133,6 +198,7 @@ pipelines:
             - echo "Step 1"
             - date=$(date)
             - write_output m1 "date1=$date"
+            - write_output m7 "date1=$date"
 
       - name: micro_build
         type: Bash
@@ -140,7 +206,7 @@ pipelines:
           affinityGroup: group1
           inputResources:
             - name: m1
-            - name: microGit
+            - name: mgit
         execution: 
           onExecute:
             - echo "Step 2"
@@ -159,7 +225,7 @@ pipelines:
             - date=$(date)
             - write_output m2 "date1=$date"
 
-      - name: step4
+      - name: step9
         type: Bash
         configuration:
           inputResources:
@@ -168,6 +234,44 @@ pipelines:
           onExecute:
             - echo "Step 4"
 
+
+      - name: step4
+        type: Bash
+        configuration:
+          affinityGroup: group3
+          inputResources:
+            - name: m6
+          inputSteps:
+            - name: group3
+        execution: 
+          onExecute:
+            - echo "Step 4"
+
+
+      - name: step7
+        type: Bash
+        configuration:
+          affinityGroup: group3
+          inputResources:
+            - name: m7
+        execution: 
+          onExecute:
+            - echo "Step 4"
+
+      - name: step5
+        type: Bash
+        configuration:
+          affinityGroup: group2
+          inputResources:
+            - name: m7
+            - name: m8
+        execution: 
+          onExecute:
+            - echo "Step 4"
+
+
+      
+      
   # - name: ResTrig
   #   steps:
   #     - name: trigger
