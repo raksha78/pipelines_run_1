@@ -19,6 +19,37 @@ resources:
       files:
         include: \btemplate\/.+\b
 
+  - name: folder1
+    type: GitRepo
+    configuration:
+      path: Khazinawaz/pipelines_run_1
+      branches:
+        include: ^{{gitBranch}}$
+      gitProvider: nawaz_gh
+      files:
+        include: \bfolder1\/.+\b
+
+  - name: folder2
+    type: GitRepo
+    configuration:
+      path: Khazinawaz/pipelines_run_1
+      branches:
+        include: ^{{gitBranch}}$
+      gitProvider: nawaz_gh
+      files:
+        include: \bfolder2\/.+\b
+
+
+  - name: folder3
+    type: GitRepo
+    configuration:
+      path: Khazinawaz/pipelines_run_1
+      branches:
+        include: ^{{gitBranch}}$
+      gitProvider: nawaz_gh
+      files:
+        include: \bfolder3\/.+\b
+
 
   - name: m1
     type: PropertyBag
@@ -50,6 +81,50 @@ pipelines:
         configuration:
           inputResources:
             - name: templateGit
+          affinityGroup: group1
+          outputResources:
+            - name: m1
+        execution: 
+          onExecute:
+            - echo "Step 1"
+            - date=$(date)
+            - write_output m1 "date1=$date"
+
+      - name: folder1_build
+        type: Bash
+        configuration:
+          inputResources:
+            - name: folder1
+          affinityGroup: group1
+          outputResources:
+            - name: m1
+        execution: 
+          onExecute:
+            - echo "Step 1"
+            - date=$(date)
+            - write_output m1 "date1=$date"
+
+
+      - name: folder2_build
+        type: Bash
+        configuration:
+          inputResources:
+            - name: folder2
+          affinityGroup: group1
+          outputResources:
+            - name: m1
+        execution: 
+          onExecute:
+            - echo "Step 1"
+            - date=$(date)
+            - write_output m1 "date1=$date"
+
+
+      - name: folder3_build
+        type: Bash
+        configuration:
+          inputResources:
+            - name: folder3
           affinityGroup: group1
           outputResources:
             - name: m1
