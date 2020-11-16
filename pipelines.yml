@@ -316,6 +316,16 @@ pipelines:
           onExecute:
             - echo "Step 4"
 
+      - name: finish
+        type: Bash
+        configuration:
+          affinityGroup: group2
+          inputResources:
+            - name: m7
+            - name: m1
+        execution: 
+          onExecute:
+            - echo "Finish"
 
       
       
