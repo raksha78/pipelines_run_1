@@ -321,8 +321,18 @@ pipelines:
         configuration:
           affinityGroup: group2
           inputResources:
-            - name: m7
             - name: m1
+            - name: m2
+            - name: m3
+            - name: m4
+            - name: m5
+            - name: m6
+            - name: m7
+            - name: m8
+            - name: m9
+            - name: m10
+            - name: m11
+            - name: m12ß
         execution: 
           onExecute:
             - echo "Finish"
