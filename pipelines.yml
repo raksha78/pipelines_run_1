@@ -301,9 +301,13 @@ pipelines:
           affinityGroup: group4
           inputResources:
             - name: m7
+          outputResources:
+            - name: m11
         execution: 
           onExecute:
             - echo "Step 4"
+            - date=$(date)
+            - write_output m11 "date1=$date"
 
       - name: step12
         type: Bash
@@ -312,9 +316,13 @@ pipelines:
           inputResources:
             - name: m7
             - name: m1
+          outputResources:
+            - name: m3 
         execution: 
           onExecute:
             - echo "Step 4"
+            - date=$(date)
+            - write_output m3 "date1=$date"
 
       - name: finish
         type: Bash
