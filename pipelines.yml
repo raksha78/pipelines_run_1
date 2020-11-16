@@ -332,7 +332,7 @@ pipelines:
             - name: m9
             - name: m10
             - name: m11
-            - name: m12ß
+            - name: m12
         execution: 
           onExecute:
             - echo "Finish"
