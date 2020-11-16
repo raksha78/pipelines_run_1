@@ -161,6 +161,7 @@ pipelines:
           outputResources:
             - name: m1
             - name: m6
+            - name: m5
         execution: 
           onExecute:
             - echo "Step 1"
@@ -177,6 +178,7 @@ pipelines:
           affinityGroup: group1
           outputResources:
             - name: m1
+            - name: m8
         execution: 
           onExecute:
             - echo "Step 1"
@@ -193,6 +195,7 @@ pipelines:
           affinityGroup: group1
           outputResources:
             - name: m1
+            - name: m7
         execution: 
           onExecute:
             - echo "Step 1"
