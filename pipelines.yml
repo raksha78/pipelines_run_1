@@ -135,6 +135,29 @@ resources:
     type: PropertyBag
     configuration:
       key1: value1
+
+
+  - name: m9
+    type: PropertyBag
+    configuration:
+      key1: value1
+      key2: value2
+
+  - name: m10
+    type: PropertyBag
+    configuration:
+      key1: value1
+
+  - name: m11
+    type: PropertyBag
+    configuration:
+      key1: value1
+      key2: value2
+
+  - name: m12
+    type: PropertyBag
+    configuration:
+      key1: value1
 pipelines:
   - name: BugPipeline2
     steps:
@@ -200,7 +223,7 @@ pipelines:
           onExecute:
             - echo "Step 1"
             - date=$(date)
-            - write_output m1 "date1=$date"
+            # - write_output m1 "date1=$date"
             - write_output m7 "date1=$date"
 
       - name: micro_build
@@ -233,12 +256,18 @@ pipelines:
         configuration:
           inputResources:
             - name: m2
+          outputResources:
+            - name: m9
+            - name: m10 
         execution: 
           onExecute:
             - echo "Step 4"
+            - date=$(date)
+            - write_output m9 "date1=$date"
+            - write_output m10 "date1=$date"
 
 
-      - name: step4
+      - name: step10
         type: Bash
         configuration:
           affinityGroup: group3
@@ -251,7 +280,7 @@ pipelines:
             - echo "Step 4"
 
 
-      - name: step7
+      - name: step11
         type: Bash
         configuration:
           affinityGroup: group3
@@ -261,7 +290,7 @@ pipelines:
           onExecute:
             - echo "Step 4"
 
-      - name: step5
+      - name: step12
         type: Bash
         configuration:
           affinityGroup: group2
