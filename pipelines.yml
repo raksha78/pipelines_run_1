@@ -274,7 +274,7 @@ pipelines:
           inputResources:
             - name: m6
           inputSteps:
-            - name: step7
+            - name: step9
         execution: 
           onExecute:
             - echo "Step 4"
