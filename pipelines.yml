@@ -283,7 +283,7 @@ pipelines:
       - name: step11
         type: Bash
         configuration:
-          affinityGroup: group3
+          affinityGroup: group4
           inputResources:
             - name: m7
         execution: 
