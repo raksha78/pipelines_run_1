@@ -272,6 +272,7 @@ pipelines:
             - name: m2
           outputResources:
             - name: m9
+            - name: m8
             - name: m10 
         execution: 
           onExecute:
