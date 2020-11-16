@@ -161,9 +161,17 @@ resources:
 pipelines:
   - name: BugPipeline2
     steps:
+      - name: start
+        type: Bash
+        execution: 
+          onExecute:
+            - echo "KICKOFF"
+
       - name: template_build
         type: Bash
         configuration:
+          inputSteps:
+            - name: start
           inputResources:
             - name: tgit
           affinityGroup: group1
@@ -178,6 +186,8 @@ pipelines:
       - name: folder1_build
         type: Bash
         configuration:
+          inputSteps:
+            - name: start
           inputResources:
             - name: folder1
           affinityGroup: group1
@@ -196,6 +206,8 @@ pipelines:
       - name: folder2_build
         type: Bash
         configuration:
+          inputSteps:
+            - name: start
           inputResources:
             - name: folder2
           affinityGroup: group1
@@ -213,6 +225,8 @@ pipelines:
       - name: folder3_build
         type: Bash
         configuration:
+          inputSteps:
+            - name: start
           inputResources:
             - name: folder3
           affinityGroup: group1
