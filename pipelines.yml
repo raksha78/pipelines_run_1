@@ -2,10 +2,10 @@ resources:
   - name: self_repo
     type: GitRepo
     configuration:
-      path: Khazinawaz/pipelines_run_1
+      path: raksha78/pipelines_run_1
       branches:
         include: ^master$
-      gitProvider: nawaz_gh
+      gitProvider: rak_github
 
   - name: matrix_property_bag_in
     type: PropertyBag
