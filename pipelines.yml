@@ -1,5 +1,5 @@
 resources:
-  - name: self_repo
+  - name: self_repo_1
     type: GitRepo
     configuration:
       path: raksha78/pipelines_run_1
@@ -25,10 +25,10 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-            - name: self_repo
+            - name: self_repo_1
         execution: 
           onExecute:
-            - pushd "$res_self_repo_resourcePath/"
+            - pushd "$res_self_repo_1_resourcePath/"
             - save_tests saveTests/empty/temp
             - save_tests saveTests/correct
             - echo "Passed"
@@ -54,7 +54,7 @@ pipelines:
           inputSteps: 
             - name: Matrix_Fan_Out_1
           inputResources:
-            - name: self_repo
+            - name: self_repo_1
         stepletMultipliers:
           fastFail: true
           allowFailures:
